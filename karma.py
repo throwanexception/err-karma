@@ -1,0 +1,45 @@
+# This is a skeleton for Err plugins, use this to get started quickly.
+
+from errbot import BotPlugin, botcmd
+
+
+class Karma(BotPlugin):
+    """An Err karma plugin"""
+    min_err_version = '1.6.0' # Optional, but recommended
+    max_err_version = '2.0.0' # Optional, but recommended
+
+    def callback_message(self, message):
+        """Triggered for every received message that isn't coming from the bot itself
+
+        You should delete it if you're not using it to override any default behaviour"""
+        try:
+            karmed_words = self['karma']
+        except KeyError:
+            karmed_words = {}
+            self['karma'] = karmed_words
+
+        for word in message.body.split():
+            if word.endswith('++'):
+                word = word[:-2]
+                if word in karmed_words.keys(): karmed_words[word] += 1
+                else: karmed_words[word] = 1
+            if word.endswith('--'):
+                word = word[:-2]
+                if word in karmed_words.keys(): karmed_words[word] -= 1
+                else: karmed_words[word] = -1
+        self['karma'].update(karmed_words)
+        if len(karmed_words) == 1:
+            word = karmed_words.keys()[0]
+            return "{} karma is now {}".format(word, self['karma'][word])
+        else:
+            return "{} just pimped various karma".format(message.from)
+
+    # Passing split_args_with=None will cause arguments to be split on any kind
+    # of whitespace, just like Python's split() does
+    @botcmd(split_args_with=None)
+    def srank(self, mess, args):
+        try:
+            karma = self['karma']
+        except KeyError:
+            karma = {}
+        return karma
