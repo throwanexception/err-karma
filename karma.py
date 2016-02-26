@@ -39,7 +39,7 @@ class Karma(BotPlugin):
             word = karmed_words[0]
             reply = "{} karma is now {}".format(word, self['karma'][word])
         else:
-            reply = "{} have just pimped various karma".format(message.frm)
+            reply = "{} have just pimped various karma".format(message.frm.split('!')[0])
         self.send(message.frm, reply, message)
         return True
 
