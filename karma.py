@@ -56,7 +56,8 @@ class Karma(BotPlugin):
 
     def _draw_unicorn(self, message, extra):
         unicorn = """
-{}
+1UP! {}
+
      _______\)%%%%%%%%._              
     `''''-'-;   % % % % %'-._         
             :b) \            '-.      
