@@ -18,7 +18,7 @@ class Karma(BotPlugin):
 
         karmed_words = []
         frm = str(message.frm).split('!')[0]
-        self.log.debug("Message FRM: ", frm)
+        self.log.debug("Message FRM: {}".format(frm))
         for word in message.body.split():
             word = word[:64]
             if word == str(message.frm).split('!')[0]:
