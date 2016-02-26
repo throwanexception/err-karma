@@ -11,11 +11,13 @@ class Karma(BotPlugin):
 
         You should delete it if you're not using it to override any default behaviour"""
         try:
-            karmed_words = self['karma']
+            stored_karma = self['karma']
         except KeyError:
-            karmed_words = {}
-            self['karma'] = karmed_words
+            stored_karma = {}
+            self['karma'] = stored_karma
+            self.log.debug('Karma storage was empty, initializing')
 
+        karmed_words = {}
         for word in message.body.split():
             if word.endswith('++'):
                 word = word[:-2]
@@ -25,7 +27,8 @@ class Karma(BotPlugin):
                 word = word[:-2]
                 if word in karmed_words.keys(): karmed_words[word] -= 1
                 else: karmed_words[word] = -1
-        self['karma'].update(karmed_words)
+        stored_karma.update(karmed_words)
+        self['karma'] = stored_karma
         self.log.debug("karmed_words = {}".format(karmed_words))
         self.log.debug("self['karma'] = {}".format(self['karma']))
         if len(karmed_words) == 1:
