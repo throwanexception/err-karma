@@ -26,6 +26,8 @@ class Karma(BotPlugin):
                 if word in karmed_words.keys(): karmed_words[word] -= 1
                 else: karmed_words[word] = -1
         self['karma'].update(karmed_words)
+        self.log.debug("karmed_words = {}".format(karmed_words))
+        self.log.debug("self['karma'] = {}".format(self['karma']))
         if len(karmed_words) == 1:
             word = karmed_words.keys()[0]
             return "{} karma is now {}".format(word, self['karma'][word])
