@@ -5,8 +5,6 @@ from errbot import BotPlugin, botcmd
 
 class Karma(BotPlugin):
     """An Err karma plugin"""
-    min_err_version = '1.6.0' # Optional, but recommended
-    max_err_version = '2.0.0' # Optional, but recommended
 
     def callback_message(self, message):
         """Triggered for every received message that isn't coming from the bot itself
