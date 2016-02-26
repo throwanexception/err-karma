@@ -1,4 +1,5 @@
 from errbot import BotPlugin, botcmd
+import operator
 # -*- coding: utf-8 -*-
 
 class Karma(BotPlugin):
@@ -29,8 +30,7 @@ class Karma(BotPlugin):
                 else: stored_karma[word] = -1
                 karmed_words.append(word)
             else:
-                self.send(message.frm, "Too long karmastring.")
-                return True
+                next
 
         self['karma'] = stored_karma
         self.log.debug("karmed_words = {}".format(karmed_words))
@@ -47,8 +47,14 @@ class Karma(BotPlugin):
     # of whitespace, just like Python's split() does
     @botcmd(split_args_with=None)
     def srank(self, mess, args):
+        self.log.info("Processing SRANK with args: {}".format(args))
         try:
             karma = self['karma']
         except KeyError:
             karma = {}
-        return karma
+
+        sorted_karma = sorted(karma.items(), key=operator.itemgetter(1))
+        rank = ""
+        for elem in sorted_karma[0:10]:
+            rank += "{} {}\n".format(elem[0], elem[1])
+        return rank
