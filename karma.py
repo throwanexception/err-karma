@@ -28,7 +28,7 @@ class Karma(BotPlugin):
                 if word in stored_karma.keys(): stored_karma[word] += 1
                 else: stored_karma[word] = 1
                 karmed_words.append(word)
-            elif word.endswith('--'):
+                elif word.endswith('--'):
                 word = word[:-2]
                 if word in stored_karma.keys(): stored_karma[word] -= 1
                 else: stored_karma[word] = -1
@@ -42,6 +42,8 @@ class Karma(BotPlugin):
         if len(karmed_words) == 1:
             word = karmed_words[0]
             reply = "{} karma is now {}".format(word, self['karma'][word])
+            if self['karma'][word] % 25 == 0:
+                self._draw_unicorn(message)
         elif len(karmed_words) > 1:
             reply = "{} have just pimped various karma".format(frm)
         else:
@@ -50,19 +52,16 @@ class Karma(BotPlugin):
         return True
 
     def _draw_unicorn(self, message):
-        unicorn = '''
-                   ,%%%,
-                 ,%%%` %==--
-                ,%%`( '|
-               ,%%@ /\_/
-     ,%.-"""--%%% "@@__
-    %%/             |__`\
-   .%'\     |   \   /  //
-   ,%' >   .'----\ |  [/
-      < <<`       ||
-       `\\\       ||
-         )\\      )\
- ^^^jgs^^"""^^^^^^""^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"'''
+        unicorn = """
+     _______\)%%%%%%%%._              
+    `''''-'-;   % % % % %'-._         
+            :b) \            '-.      
+            : :__)'    .'    .'       
+            :.::/  '.'   .'           
+            o_i/   :    ;             
+                   :   .'             
+                    ''`
+"""
         self.send(message.frm, unicorn, message)
 
     # Passing split_args_with=None will cause arguments to be split on any kind
