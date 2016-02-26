@@ -39,7 +39,7 @@ class Karma(BotPlugin):
             word = karmed_words[0]
             reply = "{} karma is now {}".format(word, self['karma'][word])
         else:
-            reply = "{} have just pimped various karma".format(message.frm.split('!')[0])
+            reply = "{} have just pimped various karma".format(str(message.frm).split('!')[0])
         self.send(message.frm, reply, message)
         return True
 
@@ -53,7 +53,7 @@ class Karma(BotPlugin):
         except KeyError:
             karma = {}
 
-        sorted_karma = sorted(karma.items(), key=operator.itemgetter(1))
+        sorted_karma = sorted(karma.items(), key=operator.itemgetter(1), reverse=True)
         rank = ""
         for elem in sorted_karma[0:10]:
             rank += "{} {}\n".format(elem[0], elem[1])
