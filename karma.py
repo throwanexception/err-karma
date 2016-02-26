@@ -38,8 +38,10 @@ class Karma(BotPlugin):
         if len(karmed_words) == 1:
             word = karmed_words[0]
             reply = "{} karma is now {}".format(word, self['karma'][word])
-        else:
+        elif len(karmed_words > 1):
             reply = "{} have just pimped various karma".format(str(message.frm).split('!')[0])
+        else:
+            return True
         self.send(message.frm, reply, message)
         return True
 
