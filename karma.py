@@ -17,6 +17,8 @@ class Karma(BotPlugin):
             self.log.debug('Karma storage was empty, initializing')
 
         karmed_words = []
+        frm = str(message.frm).split('!')[0]
+        self.log.debug("Message FRM: ", frm)
         for word in message.body.split():
             word = word[:64]
             if word == str(message.frm).split('!')[0]:
