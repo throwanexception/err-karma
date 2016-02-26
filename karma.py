@@ -22,7 +22,7 @@ class Karma(BotPlugin):
         for word in message.body.split():
             word = word[:64]
             if word[:-2] == frm:
-                    next
+                    continue
             if word.endswith('++'):
                 word = word[:-2]
                 if word in stored_karma.keys(): stored_karma[word] += 1
@@ -34,7 +34,7 @@ class Karma(BotPlugin):
                 else: stored_karma[word] = -1
                 karmed_words.append(word)
             else:
-                next
+                continue
 
         self['karma'] = stored_karma
         self.log.debug("karmed_words = {}".format(karmed_words))
