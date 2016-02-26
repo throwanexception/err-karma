@@ -49,6 +49,22 @@ class Karma(BotPlugin):
         self.send(message.frm, reply, message)
         return True
 
+    def _draw_unicorn(self, message):
+        unicorn = '''
+                   ,%%%,
+                 ,%%%` %==--
+                ,%%`( '|
+               ,%%@ /\_/
+     ,%.-"""--%%% "@@__
+    %%/             |__`\
+   .%'\     |   \   /  //
+   ,%' >   .'----\ |  [/
+      < <<`       ||
+       `\\\       ||
+         )\\      )\
+ ^^^jgs^^"""^^^^^^""^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"'''
+        self.send(message.frm, unicorn, message)
+
     # Passing split_args_with=None will cause arguments to be split on any kind
     # of whitespace, just like Python's split() does
     @botcmd(split_args_with=None)
@@ -64,3 +80,7 @@ class Karma(BotPlugin):
         for elem in sorted_karma[0:10]:
             rank += "{} {}\n".format(elem[0], elem[1])
         return rank
+
+    def _draw(self, mess, args):
+        self._draw_unicorn(mess)
+        return True
