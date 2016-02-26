@@ -43,6 +43,7 @@ class Karma(BotPlugin):
             word = karmed_words[0]
             reply = "{} karma is now {}".format(word, self['karma'][word])
             if self['karma'][word] % 25 == 0:
+                self.log.info("{} gets a levelup for {}".format(word, self['karma'][word]))
                 self._draw_unicorn(message)
         elif len(karmed_words) > 1:
             reply = "{} have just pimped various karma".format(frm)
