@@ -41,10 +41,12 @@ class Karma(BotPlugin):
         self.log.debug("self['karma'] = {}".format(self['karma']))
         if len(karmed_words) == 1:
             word = karmed_words[0]
-            reply = "{} karma is now {}".format(word, self['karma'][word])
-            if self['karma'][word] % 25 == 0:
-                self.log.info("{} gets a levelup for {}".format(word, self['karma'][word]))
-                self._draw_unicorn(message)
+            karma = self['karma'][word]
+            reply = "{} karma is now {}".format(word, karma)
+            if karma % 25 == 0:
+                self.log.info("{} gets a levelup for {}".format(word, karma))
+                self._draw_unicorn(message,reply)
+                return True
         elif: len(karmed_words) > 1:
             reply = "{} have just pimped various karma".format(frm)
         else:
@@ -52,8 +54,9 @@ class Karma(BotPlugin):
         self.send(message.frm, reply, message)
         return True
 
-    def _draw_unicorn(self, message):
+    def _draw_unicorn(self, message, extra):
         unicorn = """
+{}
      _______\)%%%%%%%%._              
     `''''-'-;   % % % % %'-._         
             :b) \            '-.      
@@ -62,7 +65,7 @@ class Karma(BotPlugin):
             o_i/   :    ;             
                    :   .'             
                     ''`
-"""
+""".format(extra)
         self.send(message.frm, unicorn, message)
 
     # Passing split_args_with=None will cause arguments to be split on any kind
