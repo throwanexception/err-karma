@@ -21,8 +21,8 @@ class Karma(BotPlugin):
         self.log.debug("Message FRM: {}".format(frm))
         for word in message.body.split():
             word = word[:64]
-            if word == str(message.frm).split('!')[0]:
-                next
+            if word[:-2] == frm:
+                    next
             if word.endswith('++'):
                 word = word[:-2]
                 if word in stored_karma.keys(): stored_karma[word] += 1
@@ -43,7 +43,7 @@ class Karma(BotPlugin):
             word = karmed_words[0]
             reply = "{} karma is now {}".format(word, self['karma'][word])
         elif len(karmed_words) > 1:
-            reply = "{} have just pimped various karma".format(str(message.frm).split('!')[0])
+            reply = "{} have just pimped various karma".format(frm)
         else:
             return True
         self.send(message.frm, reply, message)
