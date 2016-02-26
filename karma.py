@@ -28,7 +28,7 @@ class Karma(BotPlugin):
                 if word in stored_karma.keys(): stored_karma[word] += 1
                 else: stored_karma[word] = 1
                 karmed_words.append(word)
-            elif: word.endswith('--'):
+            elif word.endswith('--'):
                 word = word[:-2]
                 if word in stored_karma.keys(): stored_karma[word] -= 1
                 else: stored_karma[word] = -1
@@ -47,7 +47,7 @@ class Karma(BotPlugin):
                 self.log.info("{} gets a levelup for {}".format(word, karma))
                 self._draw_unicorn(message,reply)
                 return True
-        elif: len(karmed_words) > 1:
+        elif len(karmed_words) > 1:
             reply = "{} have just pimped various karma".format(frm)
         else:
             return True
