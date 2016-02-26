@@ -30,6 +30,7 @@ class Karma(BotPlugin):
                 karmed_words.append(word)
             else:
                 self.send(message.frm, "Too long karmastring.")
+                return True
 
         self['karma'] = stored_karma
         self.log.debug("karmed_words = {}".format(karmed_words))
