@@ -19,6 +19,8 @@ class Karma(BotPlugin):
         karmed_words = []
         for word in message.body.split():
             word = word[:64]
+            if word == str(message.frm).split('!')[0]:
+                next
             if word.endswith('++'):
                 word = word[:-2]
                 if word in stored_karma.keys(): stored_karma[word] += 1
