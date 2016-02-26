@@ -1,7 +1,5 @@
-# This is a skeleton for Err plugins, use this to get started quickly.
-
 from errbot import BotPlugin, botcmd
-
+# -*- coding: utf-8 -*-
 
 class Karma(BotPlugin):
     """An Err karma plugin"""
@@ -17,25 +15,33 @@ class Karma(BotPlugin):
             self['karma'] = stored_karma
             self.log.debug('Karma storage was empty, initializing')
 
-        karmed_words = {}
+        karmed_words = []
         for word in message.body.split():
+            word = word[:64]
             if word.endswith('++'):
                 word = word[:-2]
-                if word in karmed_words.keys(): karmed_words[word] += 1
-                else: karmed_words[word] = 1
-            if word.endswith('--'):
+                if word in stored_karma.keys(): stored_karma[word] += 1
+                else: stored_karma[word] = 1
+                karmed_words.push(word)
+            elif word.endswith('--'):
                 word = word[:-2]
-                if word in karmed_words.keys(): karmed_words[word] -= 1
-                else: karmed_words[word] = -1
-        stored_karma.update(karmed_words)
+                if word in stored_karma.keys(): stored_karma[word] -= 1
+                else: stored_karma[word] = -1
+                karmed_words.push(word)
+            else:
+                self.send_simple_reply(message, "Too long karmastring.",
+                        private=True)
+
         self['karma'] = stored_karma
         self.log.debug("karmed_words = {}".format(karmed_words))
         self.log.debug("self['karma'] = {}".format(self['karma']))
         if len(karmed_words) == 1:
-            word = karmed_words.keys()[0]
-            return "{} karma is now {}".format(word, self['karma'][word])
+            word = karmed_words[0]
+            reply = "{} karma is now {}".format(word, self['karma'][word])
         else:
-            return "{} just pimped various karma".format(message.frm)
+            reply = "{} have just pimped various karma".format(message.frm)
+        self.send_simple_reply(message, reply)
+        return True
 
     # Passing split_args_with=None will cause arguments to be split on any kind
     # of whitespace, just like Python's split() does
