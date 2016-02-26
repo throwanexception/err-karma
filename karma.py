@@ -29,8 +29,7 @@ class Karma(BotPlugin):
                 else: stored_karma[word] = -1
                 karmed_words.push(word)
             else:
-                self.send_simple_reply(message, "Too long karmastring.",
-                        private=True)
+                self.send(message.frm, "Too long karmastring.")
 
         self['karma'] = stored_karma
         self.log.debug("karmed_words = {}".format(karmed_words))
