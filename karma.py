@@ -81,6 +81,7 @@ class Karma(BotPlugin):
             rank += "{} {}\n".format(elem[0], elem[1])
         return rank
 
+    @botcmd
     def _draw(self, mess, args):
         self._draw_unicorn(mess)
         return True
