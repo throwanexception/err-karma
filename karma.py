@@ -35,10 +35,10 @@ class Karma(BotPlugin):
         self['karma'] = stored_karma
         self.log.debug("karmed_words = {}".format(karmed_words))
         self.log.debug("self['karma'] = {}".format(self['karma']))
-        if karmed_words and len(karmed_words) == 1:
+        if len(karmed_words) == 1:
             word = karmed_words[0]
             reply = "{} karma is now {}".format(word, self['karma'][word])
-        elif karmed_words and len(karmed_words > 1):
+        elif len(karmed_words > 1):
             reply = "{} have just pimped various karma".format(str(message.frm).split('!')[0])
         else:
             return True
