@@ -40,7 +40,7 @@ class Karma(BotPlugin):
             reply = "{} karma is now {}".format(word, self['karma'][word])
         else:
             reply = "{} have just pimped various karma".format(message.frm)
-        self.send_simple_reply(message, reply)
+        self.send(message.frm, reply, message)
         return True
 
     # Passing split_args_with=None will cause arguments to be split on any kind
