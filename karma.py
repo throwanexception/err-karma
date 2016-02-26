@@ -22,12 +22,12 @@ class Karma(BotPlugin):
                 word = word[:-2]
                 if word in stored_karma.keys(): stored_karma[word] += 1
                 else: stored_karma[word] = 1
-                karmed_words.push(word)
+                karmed_words.append(word)
             elif word.endswith('--'):
                 word = word[:-2]
                 if word in stored_karma.keys(): stored_karma[word] -= 1
                 else: stored_karma[word] = -1
-                karmed_words.push(word)
+                karmed_words.append(word)
             else:
                 self.send(message.frm, "Too long karmastring.")
 
