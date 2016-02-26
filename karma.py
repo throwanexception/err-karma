@@ -32,7 +32,7 @@ class Karma(BotPlugin):
             word = karmed_words.keys()[0]
             return "{} karma is now {}".format(word, self['karma'][word])
         else:
-            return "{} just pimped various karma".format(message.from)
+            return "{} just pimped various karma".format(message.frm)
 
     # Passing split_args_with=None will cause arguments to be split on any kind
     # of whitespace, just like Python's split() does
