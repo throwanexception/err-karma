@@ -27,14 +27,16 @@ class Karma(BotPlugin):
                     continue
             if word.endswith('++'):
                 word = word[:-2]
-                if word in stored_karma.keys(): stored_karma[word] += 1
-                else: stored_karma[word] = 1
-                karmed_words.append(word)
+                if word:
+                    if word in stored_karma.keys(): stored_karma[word] += 1
+                    else: stored_karma[word] = 1
+                    karmed_words.append(word)
             elif word.endswith('--'):
                 word = word[:-2]
-                if word in stored_karma.keys(): stored_karma[word] -= 1
-                else: stored_karma[word] = -1
-                karmed_words.append(word)
+                if word:
+                    if word in stored_karma.keys(): stored_karma[word] -= 1
+                    else: stored_karma[word] = -1
+                    karmed_words.append(word)
             else:
                 continue
 
