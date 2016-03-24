@@ -22,6 +22,8 @@ class Karma(BotPlugin):
         for word in message.body.split():
             word = word[:64]
             if word[:-2] == frm:
+                    self.send(message.frm, 
+                    "Public masturbation is not allowed, {}".format(frm), message)
                     continue
             if word.endswith('++'):
                 word = word[:-2]
@@ -43,7 +45,7 @@ class Karma(BotPlugin):
             word = karmed_words[0]
             karma = self['karma'][word]
             reply = "{} karma is now {}".format(word, karma)
-            if karma % 25 == 0:
+            if karma % 25 == 0 and karma > 0:
                 self.log.info("{} gets a levelup for {}".format(word, karma))
                 self._draw_unicorn(message,reply)
                 return True
