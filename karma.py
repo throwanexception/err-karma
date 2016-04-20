@@ -16,9 +16,21 @@ class Karma(BotPlugin):
             self['karma'] = stored_karma
             self.log.debug('Karma storage was empty, initializing')
 
+        try:
+            blacklist = self.config['blacklist']
+        except KeyError:
+            blacklist = []
+        try:
+            ignore_users = self.config['ignore_users']
+        except KeyError:
+            ignore_users = []
+
         karmed_words = []
         frm = str(message.frm).split('!')[0]
         self.log.debug("Message FRM: {}".format(frm))
+        if frm in ignore_users:
+            self.log.info("Ignoring karma adjustment from blacklisted user: {}".format(frm))
+            return True
         for word in message.body.split():
             word = word[:64]
             if word[:-2] == frm:
@@ -27,16 +39,20 @@ class Karma(BotPlugin):
                     continue
             if word.endswith('++'):
                 word = word[:-2]
-                if word:
+                if word and word not in blacklist:
                     if word in stored_karma.keys(): stored_karma[word] += 1
                     else: stored_karma[word] = 1
                     karmed_words.append(word)
+                else:
+                    self.log.info("Unwanted word occured: {}".format(word))
             elif word.endswith('--'):
                 word = word[:-2]
-                if word:
+                if word and word not in blacklist:
                     if word in stored_karma.keys(): stored_karma[word] -= 1
                     else: stored_karma[word] = -1
                     karmed_words.append(word)
+                else:
+                    self.log.info("Unwanted word occured: {}".format(word))
             else:
                 continue
 
@@ -59,12 +75,13 @@ class Karma(BotPlugin):
         return True
 
     def get_configuration_template(self):
-        conf = { 'blacklist': [] }
+        conf = { 'blacklist': ["word1", "word2"], 'ignore_users': ["user1", "user2"] }
         return conf
 
-    def configure(self, config):
-        self.log.debug("Called configure with: {}".format(config))
-        return None
+    def check_configuration(self, config):
+        self.log.debug("Called check_configuration with: {}".format(config))
+        # TODO: check the configuration here
+        return True
 
     def _draw_unicorn(self, message, extra):
         unicorn = """
