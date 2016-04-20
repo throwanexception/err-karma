@@ -33,8 +33,7 @@ Configuration
 Bot can be configured to ignore some words, or some users:
 
 ```
-!plugin configure Karma { 'blacklist': ["tea", "coffee"], 'ignore_users':
-["foo", "bar"] }
+!plugin configure Karma { 'blacklist': ["tea", "coffee"], 'ignore_users': ["foo", "bar"] }
 ```
 
 In the example above, `tea++` or `coffee--` will not have effect.
