@@ -58,6 +58,14 @@ class Karma(BotPlugin):
         self.send(message.to, reply, message)
         return True
 
+    def get_configuration_template(self):
+        conf = { 'blacklist': [] }
+        return conf
+
+    def configure(self, config):
+        self.log.debug("Called configure with: {}".format(config))
+        return None
+
     def _draw_unicorn(self, message, extra):
         unicorn = """
 1UP! {}
