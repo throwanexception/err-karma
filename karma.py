@@ -22,7 +22,7 @@ class Karma(BotPlugin):
         for word in message.body.split():
             word = word[:64]
             if word[:-2] == frm:
-                    self.send(message.frm, 
+                    self.send(message.target, 
                     "Public masturbation is not allowed, {}".format(frm), message)
                     continue
             if word.endswith('++'):
@@ -55,7 +55,7 @@ class Karma(BotPlugin):
             reply = "{} have just pimped various karma".format(frm)
         else:
             return True
-        self.send(message.frm, reply, message)
+        self.send(message.target, reply, message)
         return True
 
     def _draw_unicorn(self, message, extra):
@@ -71,7 +71,7 @@ class Karma(BotPlugin):
                    :   .'             
                     ''`
 """.format(extra)
-        self.send(message.frm, unicorn, message)
+        self.send(message.target, unicorn, message)
 
     # Passing split_args_with=None will cause arguments to be split on any kind
     # of whitespace, just like Python's split() does
