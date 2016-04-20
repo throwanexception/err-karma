@@ -27,6 +27,20 @@ Plugin exposes following commands to a user:
 
 - `srank` - shows top 10 list of strings with highest karma
 
+Configuration
+-------------
+
+Bot can be configured to ignore some words, or some users:
+
+```
+!plugin configure Karma { 'blacklist': ["tea", "coffee"], 'ignore_users':
+["foo", "bar"] }
+```
+
+In the example above, `tea++` or `coffee--` will not have effect.
+Also messages from user **foo** and user **bar** will be ignored by plugin
+completely.
+
 License
 -------
 
