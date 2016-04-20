@@ -4,7 +4,7 @@ err-karma
 Overview
 --------
 
-(Errbot)[https://github.com/errbotio/errbot] karma plugin.
+[Errbot](https://github.com/errbotio/errbot) karma plugin.
 
 Listens to conversations in a chatroom and increases/decreases karma for random
 strings. Example:
