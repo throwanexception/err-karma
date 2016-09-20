@@ -6,4 +6,4 @@ Module = karma
 Description = An Err karma plugin
 
 [Python]
-Version = 2
+Version = 2+

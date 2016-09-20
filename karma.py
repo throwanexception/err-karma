@@ -11,18 +11,18 @@ class Karma(BotPlugin):
         You should delete it if you're not using it to override any default behaviour"""
         try:
             stored_karma = self['karma']
-        except KeyError:
+        except (KeyError, TypeError):
             stored_karma = {}
             self['karma'] = stored_karma
             self.log.debug('Karma storage was empty, initializing')
 
         try:
             blacklist = self.config['blacklist']
-        except KeyError:
+        except (KeyError, TypeError):
             blacklist = []
         try:
             ignore_users = self.config['ignore_users']
-        except KeyError:
+        except (KeyError, TypeError):
             ignore_users = []
 
         karmed_words = []
