@@ -114,7 +114,7 @@ class Karma(BotPlugin):
         rank = "Top 10: "
         if args:
             rank = ""
-            for elem in args.split():
+            for elem in set(args.split()):
                 rank += "{}({}) ".format(elem, karma.get(elem, 0))
         else:
             sorted_karma = sorted(karma.items(), key=operator.itemgetter(1), reverse=True)
