@@ -100,7 +100,7 @@ class Karma(BotPlugin):
 
     # Passing split_args_with=None will cause arguments to be split on any kind
     # of whitespace, just like Python's split() does
-    @botcmd(split_args_with=None)
+    @botcmd
     def srank(self, mess, args):
         """Shows top 10 karma rankings"""
 
@@ -109,9 +109,14 @@ class Karma(BotPlugin):
             karma = self['karma']
         except KeyError:
             karma = {}
+            return "I don't have any karma stored yet."
 
+        rank = "Top 10: "
+        if args:
+            rank = ""
+            for elem in args.split():
+                rank += "{}({}) ".format(elem, karma.get(elem, 0))
         sorted_karma = sorted(karma.items(), key=operator.itemgetter(1), reverse=True)
-        rank = ""
         for elem in sorted_karma[0:10]:
-            rank += "{} {}\n".format(elem[0], elem[1])
+            rank += "{}({}) ".format(elem[0], elem[1])
         return rank
