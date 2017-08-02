@@ -35,7 +35,7 @@ class Karma(BotPlugin):
             word = word[:64]
             if word[:-2] == frm:
                     self.send(message.to, 
-                    "Public masturbation is not allowed, {}".format(frm), message)
+                    "Grandstanding is not allowed, {}".format(frm), message)
                     continue
             if word.endswith('++'):
                 word = word[:-2]
@@ -68,7 +68,7 @@ class Karma(BotPlugin):
                 self._draw_unicorn(message,reply)
                 return True
         elif len(karmed_words) > 1:
-            reply = "{} have just pimped various karma".format(frm)
+            reply = "{} have just upboated various karma".format(frm)
         else:
             return True
         self.send(message.to, reply, message)
